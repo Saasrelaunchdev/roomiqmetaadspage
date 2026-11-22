@@ -12,6 +12,7 @@
 <title>Free room-by-room forecast for any US address | RoomIQ</title>
 <meta name="description" content="What will this house earn by the room? Room rents, fill speed and nearby supply for one address, each with its evidence. Free plan, no card.">
 <meta name="robots" content="noindex, nofollow">
+<meta name="page-version" content="2">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RoomIQ">
 <meta property="og:title" content="What will this house earn by the room? | RoomIQ">
@@ -255,8 +256,6 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);color:var(--c-heading);letter-
 html:not(.is-preview) :is([data-tbd],[data-internal],.tbd,.ph-tag,.preview-bar){display:none!important}
 .ph-tag{display:block;margin-top:10px;font:500 13px/1.4 var(--f-text);color:var(--c-signal-text)}
 /* Under every screen, the caption says what it is: a product preview with demo data */
-.proof-chip{display:block;margin-top:10px;font:500 13px/1.4 var(--f-text);color:var(--c-text-2);text-wrap:balance}
-.proof-chip::before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:var(--c-accent);vertical-align:1px}
 
 
 .skip-link{position:absolute;left:12px;top:-80px;z-index:100;padding:12px 16px;border-radius:10px;background:var(--c-ink-950);color:#fff;font-weight:600;text-decoration:none}
@@ -279,7 +278,6 @@ html:not(.is-preview) :is([data-tbd],[data-internal],.tbd,.ph-tag,.preview-bar){
 .nap-costs span{font-size:15.5px;color:var(--c-text-2)}
 .nap-costs b{grid-row:span 2;align-self:center;font:800 clamp(28px,3vw,38px)/1 var(--f-display);letter-spacing:-.02em;color:var(--c-heading);font-variant-numeric:tabular-nums}
 .nap-costs small{font-size:13px;color:var(--c-text-2)}
-.nap-note{font-size:13.5px;color:var(--c-text-2)}
 /* Tool 1, as built on roomiq.io: rooms as cyan blocks, the rent slider, the monthly result */
 .est{display:flex;flex-direction:column;gap:24px;min-width:0;padding:clamp(22px,3vw,36px);border-radius:var(--r-card);background:var(--c-bg);border:1px solid var(--c-line-strong);box-shadow:var(--shadow-card)}
 .est-title{font:700 clamp(23px,2.3vw,30px)/1.15 var(--f-display);letter-spacing:-.02em}
@@ -522,14 +520,13 @@ html:not(.has-vsl):not(.is-preview) .vsl{display:none}
 .vsl-ch button:focus-visible{outline:2px solid var(--c-primary-300);outline-offset:0}
 @media (hover:hover) and (pointer:fine){.vsl-ch button:hover{background:color-mix(in srgb,#fff 8%,transparent)}}
 .vsl-ch time{flex:none;min-width:34px;font-weight:650;color:var(--c-primary-300);font-variant-numeric:tabular-nums}
-.vsl-cap{padding:0 20px 14px;font:500 12.5px/1.4 var(--f-text);color:var(--c-neutral-400);background:var(--c-ink-975)}
 @media (max-width:899px){
   .vsl{border-radius:16px}
   .vsl:not(.playing) .vsl-stage{aspect-ratio:auto;height:76px}
   .vsl:not(.playing) .vsl-poster{grid-template-rows:1fr;padding:10px 14px}
   .vsl:not(.playing) .vsl-kick,.vsl:not(.playing) .vsl-sum{display:none}
   .vsl:not(.playing) .vsl-play{width:48px;height:48px;box-shadow:0 0 0 6px color-mix(in srgb,var(--c-primary-400) 22%,transparent)}
-  .vsl:not(.playing) .vsl-ch,.vsl:not(.playing) .vsl-cap{display:none}
+  .vsl:not(.playing) .vsl-ch{display:none}
   .vsl-ch{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 10px 10px}
   .vsl-ch::-webkit-scrollbar{display:none}
   .vsl-ch li{flex:none}
@@ -576,8 +573,6 @@ html:not(.v-score) .sc-card{display:none}
 .house-col b{font-variant-numeric:tabular-nums}
 .house.hi{border-color:color-mix(in srgb,var(--c-signal) 70%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--c-signal) 18%,transparent)}
 .house.best{border-color:var(--c-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--c-accent) 18%,transparent)}
-.callout{margin-top:18px;padding:16px 18px;border-radius:14px;background:var(--paper);border:1px solid var(--c-line);font-size:16px;color:var(--c-heading)}
-.callout b{color:var(--c-accent-text)}
 .rooms-wrap{margin-top:clamp(36px,5vw,56px);display:grid;gap:18px}
 .rooms-wrap > *{min-width:0}
 .rooms-scroll{overflow-x:auto;overscroll-behavior-x:contain}
@@ -610,7 +605,6 @@ html:not(.v-score) .sc-card{display:none}
 .card{display:grid;gap:10px;align-content:start;padding:22px;border-radius:18px;background:var(--paper);border:1px solid var(--c-line)}
 .card h3{font:700 19px/1.2 var(--f-display);letter-spacing:-.01em}
 .card p{font-size:15.5px;color:var(--c-text-2)}
-.no-claim{margin-top:22px;font:800 clamp(24px,2.8vw,36px)/1.1 var(--f-display);letter-spacing:-.02em;color:var(--c-heading)}
 @media (min-width:900px){
   .work{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;align-items:center}
   .cards3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -624,8 +618,6 @@ html:not(.v-score) .sc-card{display:none}
 .step-n{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--c-primary-400);color:var(--c-ink-975);font:700 14px/1 var(--f-text)}
 .step h3{font:700 21px/1.2 var(--f-display);letter-spacing:-.01em}
 .step p{font-size:15.5px;color:var(--c-neutral-300)}
-.band .proof-chip{color:var(--c-neutral-300)}
-.band-note{margin-top:18px;font-size:13.5px;color:var(--c-neutral-400)}
 @media (min-width:900px){.steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}}
 
 /* FAQ: four quadrants, moved up the page */
@@ -853,7 +845,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
             <li><button type="button" data-t="436"><time>7:16</time>For operators</button></li>
             <li><button type="button" data-t="463"><time>7:43</time>Your next step</button></li>
           </ol>
-          <p class="vsl-cap">Houses and figures in the video are demo data.</p>
         </div>
         <div class="hero-shot">
           <figure>
@@ -862,7 +853,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
               <img src="/media/forecast-screen-960.webp?v=581bcb6a" srcset="/media/forecast-screen-640.webp?v=581bcb6a 640w, /media/forecast-screen-960.webp?v=581bcb6a 960w, /media/forecast-screen-1280.webp?v=581bcb6a 1280w, /media/forecast-screen-1600.webp?v=581bcb6a 1600w" sizes="(min-width: 900px) 52vw, 100vw" width="2880" height="1800" alt="RoomIQ's Property Predictor results for a six-bedroom demo house: $5,057 a month, printed as price x rooms x occupancy x 4.35 weeks, with local support, Confidence Medium and 14 comps a median 1.6 mi away." fetchpriority="high">
             </picture>
           </figure>
-          <span class="proof-chip">Product preview · demo data · web app</span>
         </div>
       </div>
 
@@ -917,7 +907,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
           <ul class="nap-costs" aria-label="What each borrowed number moves, in your numbers">
             <li><span>If rooms fill 75% of the time, not 90%</span><b data-cost="occ" aria-live="polite">$783</b><small>a month off your plan</small></li><li><span>If each rent is $20 a week too high</span><b data-cost="rent" aria-live="polite">$470</b><small>a month off your plan</small></li>
           </ul>
-          <p class="nap-note">Same calculator, same formula, your inputs.</p>
         </div>
       </div>
       <div class="est" id="estimate">
@@ -998,7 +987,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
         </div>
       </li>
     </ul>
-    <p class="callout"><b>In the demo</b> The garden house asks the most, $230 a room, but with 4 of 6 occupied it collects $920 a week. The corner house asks $190, is full and collects $950.</p>
     <div class="rooms-wrap">
       <div class="sec-head">
         <h3 class="h3">Price each room by its bath</h3>
@@ -1036,10 +1024,9 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
         <div class="work-shot">
           <picture>
             <source type="image/avif" sizes="(min-width: 900px) 55vw, 100vw" srcset="/media/forecast-lift-320.avif?v=106b6728 320w, /media/forecast-lift-480.avif?v=106b6728 480w, /media/forecast-lift-640.avif?v=106b6728 640w, /media/forecast-lift-760.avif?v=106b6728 760w">
-            <img src="/media/forecast-lift-640.webp?v=106b6728" srcset="/media/forecast-lift-320.webp?v=106b6728 320w, /media/forecast-lift-480.webp?v=106b6728 480w, /media/forecast-lift-640.webp?v=106b6728 640w, /media/forecast-lift-760.webp?v=106b6728 760w" sizes="(min-width: 900px) 55vw, 100vw" width="760" height="346" alt="Monthly revenue of $5,057 with its formula printed underneath, labeled local support and Confidence Medium." loading="lazy" decoding="async">
+            <img src="/media/forecast-lift-640.webp?v=106b6728" srcset="/media/forecast-lift-320.webp?v=106b6728 320w, /media/forecast-lift-480.webp?v=106b6728 480w, /media/forecast-lift-640.webp?v=106b6728 640w, /media/forecast-lift-760.webp?v=106b6728 760w" sizes="(min-width: 900px) 55vw, 100vw" width="760" height="346" alt="Product preview with demo data: a monthly revenue of $5,057 with its formula printed underneath, labeled local support and Confidence Medium." loading="lazy" decoding="async">
           </picture>
         </div>
-        <figcaption class="proof-chip">Product preview · demo data · web app</figcaption>
       </figure>
       <ol class="marks" aria-label="What to read on every estimate">
         <li><span><b>The formula, printed</b><span>$224 a week × 6 rooms × 86.5% × 4.35 weeks = $5,057 a month.</span></span></li>
@@ -1053,7 +1040,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
       <li class="card"><span class="ic-box"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg></span><h3>Physical inputs only</h3><p>Rooms, baths and space. Listing copy and operator behavior are left out on purpose.</p></li>
       <li class="card"><span class="ic-box"><svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg></span><h3>Thin areas say Thin</h3><p>Sparse map cells are labeled Thin, not painted as demand.</p></li>
     </ul>
-    <p class="no-claim">No accuracy claim. Working you can check.</p>
   </div>
 </section>
 
@@ -1073,7 +1059,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
             <img src="/media/market-screen-640.webp?v=3a2fcb91" srcset="/media/market-screen-480.webp?v=3a2fcb91 480w, /media/market-screen-640.webp?v=3a2fcb91 640w, /media/market-screen-960.webp?v=3a2fcb91 960w" sizes="(min-width: 900px) 30vw, 100vw" width="2880" height="1800" alt="RoomIQ's dashboard for a made-up metro: top US markets by Market Score, and a demand map of cells marked Strong, Watch, Weak and Thin." loading="lazy" decoding="async">
           </picture>
         </figure>
-        <span class="proof-chip">Product preview · demo data</span>
         <span class="step-n" aria-hidden="true">1</span>
         <h3>Explore the market around the address</h3>
         <p>Market Score, a demand map with thin evidence labeled Thin, and nearby supply.</p>
@@ -1085,7 +1070,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
             <img src="/media/baseline-screen-640.webp?v=dbdb5f14" srcset="/media/baseline-screen-480.webp?v=dbdb5f14 480w, /media/baseline-screen-640.webp?v=dbdb5f14 640w, /media/baseline-screen-960.webp?v=dbdb5f14 960w" sizes="(min-width: 900px) 30vw, 100vw" width="2880" height="1800" alt="The baseline profile for the demo house: six bedrooms and four baths, two private-bath rooms, shared-bath pressure 2.0, five of six rooms entered." loading="lazy" decoding="async">
           </picture>
         </figure>
-        <span class="proof-chip">Product preview · demo data</span>
         <span class="step-n" aria-hidden="true">2</span>
         <h3>Look inside, room by room</h3>
         <p>Rents by bath type and size, from observed rooms nearby.</p>
@@ -1097,13 +1081,11 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
             <img src="/media/forecast-screen-640.webp?v=581bcb6a" srcset="/media/forecast-screen-480.webp?v=581bcb6a 480w, /media/forecast-screen-640.webp?v=581bcb6a 640w, /media/forecast-screen-960.webp?v=581bcb6a 960w" sizes="(min-width: 900px) 30vw, 100vw" width="2880" height="1800" alt="The Decision Board for the demo house: $5,057 a month with its formula, support and confidence, and the next step." loading="lazy" decoding="async">
           </picture>
         </figure>
-        <span class="proof-chip">Product preview · demo data</span>
         <span class="step-n" aria-hidden="true">3</span>
         <h3>Test the deal with your own numbers</h3>
         <p>Cash flow, cash-on-cash, DSCR and cap rate under your own assumptions.</p>
       </li>
     </ol>
-    <p class="band-note">Deal Calculator outputs are informational, not financial or lending advice.</p>
   </div>
 </section>
 
@@ -1284,7 +1266,7 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
 <footer class="foot">
   <div class="wrap foot-in">
     <span class="brand-logo logo-rev"><svg class="logo-full" viewBox="0 0 136 30" role="img" aria-label="RoomIQ"><use href="#logo-h"/></svg></span>
-    <p>Informational only. Not financial, lending, legal or insurance advice. Houses, markets and figures in the demos are made up.</p>
+    <p>Informational only. Not financial, lending, legal or insurance advice. Every screen here is a product preview with demo data. Houses, markets and figures in the demos and the video are made up.</p>
     <nav class="foot-links" aria-label="Legal and contact">
       <a href="https://roomiq.io/privacy" data-site="privacyUrl">Privacy</a>
       <a href="https://roomiq.io/terms" data-site="termsUrl">Terms</a>

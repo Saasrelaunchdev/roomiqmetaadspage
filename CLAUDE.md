@@ -2,7 +2,13 @@
 
 The **RoomIQ Meta Ads landing page**: the page every Meta ad lands on. RoomIQ is room-by-room underwriting for rent-by-the-room houses, sold to small co-living operators and the investors learning from them. This page sells one action per visit: a free forecast on an address, or the Co-Living Deal Readiness Scorecard.
 
-It is its own Vercel project. Vercel serves the repo root as it is (`vercel.json`: no install, no build), so the page lives at `/` on its own domain. Edit `index.html` here directly.
+It is its own Vercel project. Vercel serves the repo root as it is (`vercel.json`: no install, no build; `.vercelignore` keeps `CLAUDE.md` and `CHANGELOG.md` off the site), so the page lives at `/` on its own domain. Edit `index.html` here directly.
+
+## Anti-regression
+
+- Before any edit, pull the newest copy of the default branch (`git pull --ff-only`) and work on it. Never replace `index.html` with a copy from anywhere else (the main landing page, a zip, an earlier commit, a chat).
+- Every change is a new version: raise `<meta name="page-version">` in `index.html` by one and add `## vN` to the top of `CHANGELOG.md`, in the same commit.
+- Nothing on the page may disappear unasked. Things removed on purpose are listed in `REMOVED` in the GTM repo's `meta-launch/build/check.py`, which fails if any comes back.
 
 ## Layout
 
@@ -26,7 +32,7 @@ It is its own Vercel project. Vercel serves the repo root as it is (`vercel.json
 2. **Compare structure and evidence, never people.** No competitor names (categories only). No host name, listing title or photo, exact address or named data-source platform. Every house, market and figure in the demos is made up and says so.
 3. **Housing ad rules.** The campaign runs under Meta's housing special ad category: nothing on the page targets or segments by age, gender or ZIP.
 4. **Tracking.** The pixel loads only after consent and honors Global Privacy Control. No personal data in events or URLs. Each browser event carries an `event_id` so the Conversions API copy is deduplicated.
-5. **Screens are honest.** Product previews are mockups of features RoomIQ really has, captioned as previews; never call one a real screen.
+5. **Screens are honest, without captions.** Since v2 there is no caption or note under any screen, illustration or visual (as on the main landing page since its v4; `check.py` in the GTM repo fails if one comes back). Honesty lives in the footer note (every screen is a product preview with demo data; demos and the video are made up) and in each image's alt text: keep both accurate when you change a screen. Never present a mockup as real.
 6. **Copy budget.** Headline up to 8 words, the line under it up to 16, labels up to 5, other sentences up to 20, FAQ answers up to 35. No em dashes anywhere.
 7. **Numbers agree.** Everything runs at 4.35 weeks a month, as the product prints. If you change a figure, change the arithmetic it comes from, and the ads and VSL that quote it.
 8. **Phone first, WCAG 2.2 AA.** Check at 390 px and 1440 px, light and dark (`?theme=dark`), and with reduced motion (`?tier=c`). Keep keyboard and screen-reader support on every interactive part.
