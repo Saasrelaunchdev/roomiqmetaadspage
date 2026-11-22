@@ -14,13 +14,14 @@ It is its own Vercel project. Vercel serves the repo root as it is (`vercel.json
 
 - `index.html`: the whole page. Its CSS (`<style>`) and script (`<script>`) are inside it. The site facts sit in `SITE` near the top of the script (`siteUrl`, `formEndpoint`, `metaPixelId`, `pricingUrl`, `scorecardUrl`, `vsl`, `coveredMarkets`, `seatsLeft`).
 - `?v=` picks a whitelisted headline that matches the ad (`forecast`, `borrowed`, `rooms`, `supply`, `formula`, `str`, `next`, `score`); `?v=score` leads with the scorecard's buttons. The ads' website URLs use these names: never rename one without changing the ads.
-- `media/`: the product previews and the deal demo's three made-up houses (`media/demo/`), copied from the main landing page.
+- `media/`: the product previews (`forecast`, `market` and `baseline` screens, 320 to 1920 px) and the deal demo's three made-up houses (`media/demo/`), copied from the main landing page.
+- **Screens zoom on their detail** (since v4, as on the main landing page). Each screen is an empty `<figure class="cf" data-screen='{...}'>` that the script builds from `SHOTS` (sizes, widths, image versions, placeholders and named boxes); `zoom` names the box to zoom to (`zoomNarrow` under 700 px), `zoomW` how much of the screen's width stays in view, `data-zoom-card` zooms inside a window, `start` begins zoomed, `alt` is the screen's alt text. Once a screen is in view a cursor (a touch mark on phones) clicks the detail and it zooms in; the button over it zooms out and in. The frame and zoom CSS and script, and the `SHOTS` entries, are copied from the main page: if they change there, copy them here.
 - `fonts/`: Bricolage Grotesque (display) and Instrument Sans (text).
 - `og.png` (the share image, 1200 x 630) and `favicon.svg`.
 
 ## Where it comes from
 
-- **The main landing page** is `Saasrelaunchdev/RoomIQproductionlandingpage` (`index.html`). This page's shared CSS (tokens, base, calculator, form, dialogs) is copied from it: change both. The "See Portfolio and Operator" link goes to the main page's pricing section through `SITE.pricingUrl`; it stays hidden until that is set.
+- **The main landing page** is `Saasrelaunchdev/RoomIQproductionlandingpage` (`index.html`). This page's shared CSS (tokens, base, calculator, form, dialogs, screen frames and zoom) and the zoom script are copied from it: change both. The "See Portfolio and Operator" link goes to the main page's pricing section through `SITE.pricingUrl`; it stays hidden until that is set.
 - **The Deal Readiness Scorecard** is a separate tool, built on its own (removed from this page in v3, as from the main page in its v5). The four "score" buttons (hero link, the `?v=score` panel, the final section, the phone sticky bar on `?v=score`) link to it once `SITE.scorecardUrl` is set, campaign parameters carried. Until then they are placeholders (`href="#"`) and a click does nothing. The tool, not this page, sends `ScorecardStart` and `ScorecardComplete` to the same Meta dataset.
 - **The ads, the VSL script and the plan** are in `Saasrelaunchdev/roomIQGTMBuild`, `meta-launch/` (`PLAN.md`, `README.md`). The VSL chapter times on this page come from `meta-launch/build/vsl_content.py`; if the script changes, update the chapter list here.
 - **Check it** from `meta-launch/build` in the GTM repo, with this repo checked out next to it:

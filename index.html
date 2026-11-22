@@ -12,7 +12,7 @@
 <title>Free room-by-room forecast for any US address | RoomIQ</title>
 <meta name="description" content="What will this house earn by the room? Room rents, fill speed and nearby supply for one address, each with its evidence. Free plan, no card.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="page-version" content="3">
+<meta name="page-version" content="4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RoomIQ">
 <meta property="og:title" content="What will this house earn by the room? | RoomIQ">
@@ -501,8 +501,6 @@ html:not(.has-vsl):not(.is-preview) .vsl{display:none}
 }
 
 /* The product shot that takes the VSL's place on a PC until the video is set */
-.hero-shot figure{border-radius:var(--r-screen);overflow:hidden;background:var(--c-bg);box-shadow:var(--shadow-device)}
-.hero-shot img{width:100%;height:auto}
 
 /* The form card */
 .ff{display:grid;gap:12px;padding:clamp(16px,2.4vw,28px);border-radius:var(--r-card);background:var(--c-bg);border:1px solid var(--c-line-strong);box-shadow:var(--shadow-card)}
@@ -560,8 +558,6 @@ html:not(.v-score) .score-card{display:none}
 
 /* Numbers that show their working */
 .work{display:grid;gap:28px}
-.work-shot{border-radius:var(--r-screen);overflow:hidden;background:#fff;box-shadow:var(--shadow-device);border:1px solid var(--c-line)}
-.work-shot img{width:100%;height:auto}
 .marks{display:grid;gap:12px;counter-reset:m}
 .marks li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start}
 .marks li::before{counter-increment:m;content:counter(m);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c-heading);color:var(--c-bg);font:700 14px/1 var(--f-text)}
@@ -578,10 +574,69 @@ html:not(.v-score) .score-card{display:none}
 }
 
 /* How it works, in one screen */
+/* ============================================================
+   Screen frames (.cf) and the zoom on the detail: as on the main landing page
+   ============================================================ */
+.cf{position:relative;display:block}
+.dev{position:relative;overflow:hidden}
+.dev-web{border-radius:16px;background:var(--c-neutral-50);box-shadow:var(--shadow-soft);padding-top:var(--bar)}
+.dev-web .bar{position:absolute;top:0;left:0;right:0;height:var(--bar);display:flex;gap:5px;align-items:center;padding-left:10px}
+.dev-web .bar i{width:6px;height:6px;border-radius:50%;background:var(--c-neutral-200)}
+.dev-web .scr-box{position:relative;aspect-ratio:16/10}
+.dev-crop{border-radius:14px;box-shadow:var(--shadow-soft)}
+.dev-crop .scr-box{position:relative;aspect-ratio:var(--ar,2/1)}
+.scr{position:absolute;inset:0;overflow:hidden;background:var(--c-screen);container-type:inline-size}
+.scr img{width:100%;height:100%;object-fit:cover;object-position:top}
+.scr picture{display:block;width:100%;height:100%}
+.scr.shot{background:var(--lq) center/cover no-repeat}
+.scr.shot img{opacity:0;transition:opacity var(--t-ui) var(--ease-out)}
+.scr.shot.loaded img{opacity:1}
+.focus{position:absolute;border-radius:var(--fr);box-shadow:0 0 0 2px var(--c-accent),0 0 0 7px color-mix(in srgb,var(--c-accent) 22%,transparent);pointer-events:none}
+.ph{position:absolute;inset:0;display:grid;place-items:center;background:repeating-linear-gradient(135deg,var(--c-neutral-50) 0 10px,var(--c-screen) 10px 20px);color:var(--c-signal-text);font:600 12px/1.3 var(--f-text);text-align:center;padding:8px}
+/* Zoom on the detail: the screen's layer (.zl) zooms inside the screen, or, in the cards, inside a window */
+.zw{position:relative;aspect-ratio:1.25;overflow:hidden;background:radial-gradient(120% 90% at 0 0,color-mix(in srgb,var(--c-accent) 14%,transparent),transparent 60%),var(--c-surface-2);border-bottom:1px solid var(--c-line)}
+.zl{position:absolute;inset:0;transform-origin:0 0;transition:translate 1.1s var(--ease-in-out),scale 1.1s var(--ease-in-out)}
+.zoomed .zl{translate:var(--zx,0) var(--zy,0);scale:var(--z,1)}
+.zw .dev{position:absolute}
+.zw .dev-web,.zw .dev-crop{left:7%;top:8%;width:115%}
+.cf.z1 .zbtn{display:none}
+.zring{position:absolute;z-index:2;border-radius:var(--fr);pointer-events:none;opacity:0;box-shadow:0 0 0 calc(2px / var(--z,1)) var(--c-accent),0 0 0 calc(7px / var(--z,1)) color-mix(in srgb,var(--c-accent) 24%,transparent),0 0 0 100vmax color-mix(in srgb,var(--c-screen) 34%,transparent);transition:opacity .45s var(--ease-out)}
+.zoomed .zring{opacity:1;transition-delay:.85s}
+.zring.plain,.zoomed .zring.plain{box-shadow:none}
+.zring.plain::after{content:none}
+.zring.sig{box-shadow:0 0 0 calc(2px / var(--z,1)) var(--c-signal),0 0 0 calc(7px / var(--z,1)) color-mix(in srgb,var(--c-signal) 24%,transparent),0 0 0 100vmax color-mix(in srgb,var(--c-screen) 34%,transparent)}
+.zring::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 calc(2px / var(--z,1)) var(--c-accent);opacity:0}
+.js:not(.tier-c) .zoomed .zring::after{animation:zring 1.1s var(--ease-out) 1.2s}
+@keyframes zring{from{opacity:.9;inset:0}to{opacity:0;inset:calc(-16px / var(--z,1))}}
+.tier-c .zl,.tier-c .zring{transition:none}
+.zc-cursor,.zc-touch,.zc-ripple{position:absolute;z-index:5;left:var(--cx,50%);top:var(--cy,50%);pointer-events:none;opacity:0}
+.zc-cursor{width:18px;transform-origin:0 0;animation:zc-cursor 1.5s both}
+.zc-cursor svg{display:block;width:18px;height:26px;overflow:visible}
+.zc-cursor path{fill:var(--c-neutral-950);stroke:var(--c-neutral-25);stroke-width:1.4;stroke-linejoin:round}
+.zc-touch{width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:color-mix(in srgb,var(--c-neutral-950) 16%,transparent);box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c-neutral-25) 85%,transparent);animation:touch .7s var(--ease-out) both}
+.zc-ripple{width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;border:2px solid var(--c-accent);animation:ripple .6s var(--ease-out) 1.1s forwards}
+.zc-touch ~ .zc-ripple{animation-delay:.3s}
+.scr .zc-touch{width:var(--zt,30px);height:var(--zt,30px);margin:calc(var(--zt,30px) / -2) 0 0 calc(var(--zt,30px) / -2)}
+.scr .zc-ripple{width:calc(var(--zt,30px) * 1.2);height:calc(var(--zt,30px) * 1.2);margin:calc(var(--zt,30px) * -.6) 0 0 calc(var(--zt,30px) * -.6)}
+@keyframes zc-cursor{0%{opacity:0;translate:90px 70px}10%{opacity:1;translate:90px 70px;animation-timing-function:var(--ease-in-out)}65%{translate:0 0;scale:1;animation-timing-function:var(--ease-out)}71%{scale:.82}78%{scale:1}88%{opacity:1}100%{opacity:0;translate:0 0;scale:1}}
+@keyframes touch{0%{opacity:0;scale:1.6}30%{opacity:1;scale:1}70%{opacity:1;scale:.9}100%{opacity:0;scale:.9}}
+@keyframes ripple{0%{opacity:.9;scale:.5}100%{opacity:0;scale:1.8}}
+.zbtn{position:absolute;inset:0;z-index:6;display:grid;align-content:end;justify-content:end;padding:12px;border:0;border-radius:0;background:none;cursor:zoom-in;-webkit-tap-highlight-color:transparent}
+.zoomed .zbtn{cursor:zoom-out}
+.zbtn:focus-visible{outline-offset:-4px;border-radius:calc(var(--r-card) - 2px) calc(var(--r-card) - 2px) 0 0}
+.dev > .zbtn{padding:10px}
+.dev > .zbtn:focus-visible{outline-offset:-3px;border-radius:inherit}
+.zbtn.mini .ic{display:none}
+.zbtn .ic{grid-area:1 / 1;width:var(--zb,36px);height:var(--zb,36px);padding:calc(var(--zb,36px) / 4);border-radius:50%;background:color-mix(in srgb,var(--c-bg) 92%,transparent);border:1px solid var(--c-line-strong);color:var(--c-heading);box-shadow:var(--shadow-soft);transition:opacity var(--t-ui) ease,scale var(--t-press) var(--ease-out)}
+.zbtn .ic + .ic,.zoomed .zbtn .ic{opacity:0}
+.zoomed .zbtn .ic + .ic{opacity:1}
+.zbtn:active .ic{scale:.94}
+/* The Meta page's placements: the hero and the evidence screen in their device frame; the steps zoom inside a window */
+.hero-shot .dev-web,.work-shot .dev-web{border-radius:var(--r-screen);box-shadow:var(--shadow-device)}
+.step .cf{border-radius:12px;overflow:hidden}
+.step .zw{border-bottom:0}
 .steps{display:grid;gap:16px}
 .step{display:grid;gap:14px;align-content:start;padding:16px;border-radius:var(--r-card);background:color-mix(in srgb,#fff 6%,transparent);border:1px solid color-mix(in srgb,#fff 12%,transparent)}
-.step figure{border-radius:12px;overflow:hidden;background:#fff}
-.step img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:left top}
 .step-n{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--c-primary-400);color:var(--c-ink-975);font:700 14px/1 var(--f-text)}
 .step h3{font:700 21px/1.2 var(--f-display);letter-spacing:-.01em}
 .step p{font-size:15.5px;color:var(--c-neutral-300)}
@@ -730,7 +785,9 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
   <defs>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3M11 8v6M8 11h6"/></symbol>
+    <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3M8 11h6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
     <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
@@ -814,12 +871,7 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
           </ol>
         </div>
         <div class="hero-shot">
-          <figure>
-            <picture>
-              <source type="image/avif" sizes="(min-width: 900px) 52vw, 100vw" srcset="/media/forecast-screen-640.avif?v=581bcb6a 640w, /media/forecast-screen-960.avif?v=581bcb6a 960w, /media/forecast-screen-1280.avif?v=581bcb6a 1280w, /media/forecast-screen-1600.avif?v=581bcb6a 1600w">
-              <img src="/media/forecast-screen-960.webp?v=581bcb6a" srcset="/media/forecast-screen-640.webp?v=581bcb6a 640w, /media/forecast-screen-960.webp?v=581bcb6a 960w, /media/forecast-screen-1280.webp?v=581bcb6a 1280w, /media/forecast-screen-1600.webp?v=581bcb6a 1600w" sizes="(min-width: 900px) 52vw, 100vw" width="2880" height="1800" alt="RoomIQ's Property Predictor results for a six-bedroom demo house: $5,057 a month, printed as price x rooms x occupancy x 4.35 weeks, with local support, Confidence Medium and 14 comps a median 1.6 mi away." fetchpriority="high">
-            </picture>
-          </figure>
+          <figure class="cf cf-web" data-screen="{&quot;cap&quot;: &quot;forecast&quot;, &quot;shot&quot;: &quot;screen&quot;, &quot;kind&quot;: &quot;web&quot;, &quot;zoom&quot;: &quot;lift&quot;, &quot;zoomW&quot;: 44, &quot;eager&quot;: true, &quot;alt&quot;: &quot;RoomIQ&#x27;s Property Predictor results for a six-bedroom demo house: $5,057 a month, printed as price x rooms x occupancy x 4.35 weeks, with local support, Confidence Medium and 14 comps a median 1.6 mi away.&quot;}" data-eager></figure>
         </div>
       </div>
 
@@ -987,14 +1039,7 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
       <p class="lead">Every estimate prints its formula, its comps and how sure it is.</p>
     </header>
     <div class="work">
-      <figure>
-        <div class="work-shot">
-          <picture>
-            <source type="image/avif" sizes="(min-width: 900px) 55vw, 100vw" srcset="/media/forecast-lift-320.avif?v=106b6728 320w, /media/forecast-lift-480.avif?v=106b6728 480w, /media/forecast-lift-640.avif?v=106b6728 640w, /media/forecast-lift-760.avif?v=106b6728 760w">
-            <img src="/media/forecast-lift-640.webp?v=106b6728" srcset="/media/forecast-lift-320.webp?v=106b6728 320w, /media/forecast-lift-480.webp?v=106b6728 480w, /media/forecast-lift-640.webp?v=106b6728 640w, /media/forecast-lift-760.webp?v=106b6728 760w" sizes="(min-width: 900px) 55vw, 100vw" width="760" height="346" alt="Product preview with demo data: a monthly revenue of $5,057 with its formula printed underneath, labeled local support and Confidence Medium." loading="lazy" decoding="async">
-          </picture>
-        </div>
-      </figure>
+      <figure class="cf cf-web work-shot" data-screen="{&quot;cap&quot;: &quot;forecast&quot;, &quot;shot&quot;: &quot;screen&quot;, &quot;kind&quot;: &quot;web&quot;, &quot;zoom&quot;: &quot;17.64 22.62 79.44 43.2&quot;, &quot;zoomW&quot;: 82, &quot;zoomNarrow&quot;: &quot;lift&quot;, &quot;zoomWNarrow&quot;: 44, &quot;tone&quot;: &quot;plain&quot;, &quot;start&quot;: true, &quot;alt&quot;: &quot;Product preview with demo data: RoomIQ&#x27;s forecast for a six-bedroom demo house, $5,057 a month with its formula, local support, Confidence Medium and 14 comps a median 1.6 miles away.&quot;}"></figure>
       <ol class="marks" aria-label="What to read on every estimate">
         <li><span><b>The formula, printed</b><span>$224 a week × 6 rooms × 86.5% × 4.35 weeks = $5,057 a month.</span></span></li>
         <li><span><b>Support and confidence</b><span>Local support, Confidence Medium: how much evidence stands behind the number.</span></span></li>
@@ -1020,34 +1065,19 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
     </header>
     <ol class="steps">
       <li class="step">
-        <figure>
-          <picture>
-            <source type="image/avif" sizes="(min-width: 900px) 30vw, 100vw" srcset="/media/market-screen-480.avif?v=3a2fcb91 480w, /media/market-screen-640.avif?v=3a2fcb91 640w, /media/market-screen-960.avif?v=3a2fcb91 960w">
-            <img src="/media/market-screen-640.webp?v=3a2fcb91" srcset="/media/market-screen-480.webp?v=3a2fcb91 480w, /media/market-screen-640.webp?v=3a2fcb91 640w, /media/market-screen-960.webp?v=3a2fcb91 960w" sizes="(min-width: 900px) 30vw, 100vw" width="2880" height="1800" alt="RoomIQ's dashboard for a made-up metro: top US markets by Market Score, and a demand map of cells marked Strong, Watch, Weak and Thin." loading="lazy" decoding="async">
-          </picture>
-        </figure>
+        <figure class="cf cf-web" data-screen="{&quot;cap&quot;: &quot;market&quot;, &quot;shot&quot;: &quot;screen&quot;, &quot;kind&quot;: &quot;web&quot;, &quot;zoom&quot;: &quot;legend&quot;, &quot;zoomW&quot;: 52, &quot;alt&quot;: &quot;RoomIQ&#x27;s dashboard for a made-up metro: top US markets by Market Score, and a demand map of cells marked Strong, Watch, Weak and Thin.&quot;}" data-zoom-card></figure>
         <span class="step-n" aria-hidden="true">1</span>
         <h3>Explore the market around the address</h3>
         <p>Market Score, a demand map with thin evidence labeled Thin, and nearby supply.</p>
       </li>
       <li class="step">
-        <figure>
-          <picture>
-            <source type="image/avif" sizes="(min-width: 900px) 30vw, 100vw" srcset="/media/baseline-screen-480.avif?v=dbdb5f14 480w, /media/baseline-screen-640.avif?v=dbdb5f14 640w, /media/baseline-screen-960.avif?v=dbdb5f14 960w">
-            <img src="/media/baseline-screen-640.webp?v=dbdb5f14" srcset="/media/baseline-screen-480.webp?v=dbdb5f14 480w, /media/baseline-screen-640.webp?v=dbdb5f14 640w, /media/baseline-screen-960.webp?v=dbdb5f14 960w" sizes="(min-width: 900px) 30vw, 100vw" width="2880" height="1800" alt="The baseline profile for the demo house: six bedrooms and four baths, two private-bath rooms, shared-bath pressure 2.0, five of six rooms entered." loading="lazy" decoding="async">
-          </picture>
-        </figure>
+        <figure class="cf cf-web" data-screen="{&quot;cap&quot;: &quot;baseline&quot;, &quot;shot&quot;: &quot;screen&quot;, &quot;kind&quot;: &quot;web&quot;, &quot;zoom&quot;: &quot;bathmix&quot;, &quot;zoomW&quot;: 46, &quot;alt&quot;: &quot;The baseline profile for the demo house: six bedrooms and four baths, two private-bath rooms, shared-bath pressure 2.0, five of six rooms entered.&quot;}" data-zoom-card></figure>
         <span class="step-n" aria-hidden="true">2</span>
         <h3>Look inside, room by room</h3>
         <p>Rents by bath type and size, from observed rooms nearby.</p>
       </li>
       <li class="step">
-        <figure>
-          <picture>
-            <source type="image/avif" sizes="(min-width: 900px) 30vw, 100vw" srcset="/media/forecast-screen-480.avif?v=581bcb6a 480w, /media/forecast-screen-640.avif?v=581bcb6a 640w, /media/forecast-screen-960.avif?v=581bcb6a 960w">
-            <img src="/media/forecast-screen-640.webp?v=581bcb6a" srcset="/media/forecast-screen-480.webp?v=581bcb6a 480w, /media/forecast-screen-640.webp?v=581bcb6a 640w, /media/forecast-screen-960.webp?v=581bcb6a 960w" sizes="(min-width: 900px) 30vw, 100vw" width="2880" height="1800" alt="The Decision Board for the demo house: $5,057 a month with its formula, support and confidence, and the next step." loading="lazy" decoding="async">
-          </picture>
-        </figure>
+        <figure class="cf cf-web" data-screen="{&quot;cap&quot;: &quot;forecast&quot;, &quot;shot&quot;: &quot;screen&quot;, &quot;kind&quot;: &quot;web&quot;, &quot;zoom&quot;: &quot;scenarios&quot;, &quot;zoomW&quot;: 40, &quot;alt&quot;: &quot;The Decision Board for the demo house: $5,057 a month with its formula, support and confidence, and the next step.&quot;}" data-zoom-card></figure>
         <span class="step-n" aria-hidden="true">3</span>
         <h3>Test the deal with your own numbers</h3>
         <p>Cash flow, cash-on-cash, DSCR and cap rate under your own assumptions.</p>
@@ -1325,7 +1355,8 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
     rentValue: "{v}/wk",
     rentText: "{v} per week",
     seats: "{n} of 12 seats left · updated {d}",
-    scoreCta: "Get my Deal Readiness Score"
+    scoreCta: "Get my Deal Readiness Score",
+    zoom: "Zoom the screen in or out"
   };
 
   /* ---------- RoomIQ's arithmetic, as on the main landing page: 4.35 weeks a month, as the product prints ---------- */
@@ -1667,6 +1698,145 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
     slider.addEventListener("input", () => { rent = +slider.value; draw(); });
     draw();
   }
+
+  // The screens: sizes, widths, image versions (?v=), blurred placeholders and the named boxes the zoom aims at.
+  // The same values as SHOTS on the main landing page; if a screen changes there, copy its entry here.
+  const SHOTS = {"forecast":{"screen":{"w":2880,"h":1800,"ws":[320,480,640,800,960,1280,1600,1920],"lq":"data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAACwAwCdASoYAA8APu1iqU2ppaQiMAgBMB2JQBdgA9IGIa68YDGkEAD+6iOMm/vVE11kVhRfK6Bc+fFwffKzChUw90x6SRaaWPirhDSvtAiMDoQRU2x4rUbPFo3LuLM1aXKx/KFR43cAAA==","v":"581bcb6a","kind":"web","boxes":{"steps":[64.44,13.39,32.64,7.89,1.111],"board":[17.64,22.62,79.44,54.21,1.111],"nextstep":[19.24,31.63,76.25,7.11,0.972],"lift":[17.99,39.85,26.33,19.05,1.111],"labels":[19.24,41.4,23.55,2.89,0],"formula":[19.24,54.93,23.55,2.42,0],"why":[19.24,59.01,52.15,2,0],"scenarios":[19.24,62.84,24.86,12.32,1.111],"support":[44.93,62.84,24.86,12.32,1.111],"best":[70.63,62.84,24.86,12.32,1.111],"kpis":[17.64,77.94,79.44,6.76,0],"details":[17.64,85.8,33.45,6.79,1.111],"garage":[51.92,85.8,45.16,6.79,1.111]}}},"market":{"screen":{"w":2880,"h":1800,"ws":[320,480,640,800,960,1280,1600,1920],"lq":"data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAQBACdASoYAA8APu1iqU2ppaOiMAgBMB2JQBUgv/wG9UtthcQuj2/QGAD+6iOMm/yGw1j3SSWHUe8ciKahAJQm1t3HsgfiWWS+Fx7VOW09wegyPExmPIHmotrUw1KjdFYqrgAA","v":"3a2fcb91","kind":"web","boxes":{"leaders":[18.4,44.45,31.53,43.2,1.111],"map":[52.71,16.78,45.14,81.56,0],"legend":[53.68,82.36,43.19,14.42,0.972]}}},"baseline":{"screen":{"w":2880,"h":1800,"ws":[320,480,640,800,960,1280,1600,1920],"lq":"data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQBACdASoYAA8APu1iqU2ppaOiMAgBMB2JYwDCgB6SAI9iXDU+wRBiQAD+6iOMm/vVE11mEgbeXv1CnQ5wDa8+G4r8px550NJUB6LE1f5eFX9sFVfkniaFFeUfjKooJyHOqKJ+AAA=","v":"dbdb5f14","kind":"web","boxes":{"bathmix":[59.31,29.93,36.18,31.28,0.972],"roommix":[22.29,62.55,36.18,34.92,0.972],"pricing":[59.31,62.55,36.18,34.92,0.972]}}}};
+  /* ---------- Screen frames: <figure class="cf cf-web|cf-crop" data-screen='{"cap":...,"shot":...,"zoom":...}'>.
+     The frame builds its device, then a <picture> of the processed shot over a blurred placeholder of itself ---------- */
+  const kebab = (s) => String(s).replace(/[A-Z]/g, (m) => "-" + m.toLowerCase()).replace(/[^a-z0-9-]+/gi, "-").toLowerCase();
+  const shotFor = (id, name) => (SHOTS[id] && SHOTS[id][name]) || null;
+  const shotFile = (id, name, w, ext) => { const s = shotFor(id, name); return `/media/${kebab(id)}-${kebab(name)}-${w}.${ext}${s && s.v ? "?v=" + s.v : ""}`; };
+  const srcset = (id, name, s, ext) => s.ws.map((w) => `${shotFile(id, name, w, ext)} ${w}w`).join(", ");
+  const boxOf = (s, ref) => {
+    if (!ref) return null;
+    if (/^[\d.\s-]+$/.test(String(ref))) return String(ref).trim().split(/\s+/).map(Number);
+    return (s && s.boxes && s.boxes[ref]) || null;
+  };
+  function screenOf(el) {
+    if (!el._screen) { try { el._screen = JSON.parse(el.dataset.screen || "{}"); } catch (e) { el._screen = {}; } }
+    return el._screen;
+  }
+  const mqNarrow = matchMedia("(max-width: 699px)");
+  function zoomParams(f) {
+    const sc = screenOf(f), s = shotFor(sc.cap, sc.shot), n = mqNarrow.matches && sc.zoomNarrow;
+    return { box: boxOf(s, n || sc.zoom) || [40, 40, 20, 20, 0], vw: +((n && sc.zoomWNarrow) || sc.zoomW || 60) };
+  }
+  function shotHTML(el, sc, s) {
+    const zw = sc.zoom && zoomParams(el).vw;
+    const sizes = zw ? `${Math.round(((el.clientWidth || 360) * 100) / zw)}px` : `${Math.round(el.clientWidth) || 360}px`;
+    const sources = ["avif", "webp"].map((t) => `<source type="image/${t}" srcset="${srcset(sc.cap, sc.shot, s, t)}" sizes="${sizes}">`).join("");
+    const cap = (T.screens && T.screens[sc.cap]) || {};
+    const alt = el.tagName === "FIGURE" ? sc.alt || (cap.alt && cap.alt[sc.shot]) || cap.tag || "" : "";
+    const first = sc.eager || "eager" in el.dataset ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
+    const focus = sc.focus && boxOf(s, sc.focus);
+    return `<picture>${sources}<img src="${shotFile(sc.cap, sc.shot, s.ws[Math.min(3, s.ws.length - 1)], "webp")}" srcset="${srcset(sc.cap, sc.shot, s, "webp")}" sizes="${sizes}" width="${s.w}" height="${s.h}" alt="${xmlEsc(alt)}" decoding="async"${first}></picture>`
+      + (focus ? `<span class="focus" style="left:${focus[0]}%;top:${focus[1]}%;width:${focus[2]}%;height:${focus[3]}%;--fr:${focus[4] || 0}cqw"></span>` : "");
+  }
+  function renderFrame(el) {
+    const sc = screenOf(el);
+    const kind = sc.kind || (el.classList.contains("cf-crop") ? "crop" : "web");
+    el.classList.add("cf-" + kind);
+    const s = shotFor(sc.cap, sc.shot);
+    const cap = (T.screens && T.screens[sc.cap]) || { tag: sc.cap };
+    if (kind === "crop" && s) el.style.setProperty("--ar", `${s.w}/${s.h}`);
+    const inner = s ? shotHTML(el, sc, s) : `<span class="ph">${xmlEsc(T.placeholder || "Placeholder")} · ${xmlEsc(sc.cap || "?")} · ${xmlEsc(sc.shot || "")}</span>`;
+    const scr = s ? `<div class="scr shot" style="--lq:url('${s.lq}')">` : '<div class="scr">';
+    const chrome = kind === "web" ? '<div class="bar"><i></i><i></i><i></i></div>' : "";
+    const hidden = s && el.tagName === "FIGURE" ? "" : ' aria-hidden="true"';
+    const zoom = !!(s && sc.zoom), card = zoom && "zoomCard" in el.dataset;
+    const zring = zoom ? `<span class="zring${sc.tone ? " " + sc.tone : ""}"></span>` : "";
+    const zbtn = zoom ? `<button class="zbtn" type="button" aria-pressed="false" aria-label="${xmlEsc(T.zoom)}">`
+      + '<svg class="ic" aria-hidden="true"><use href="#i-zoom-in"/></svg><svg class="ic" aria-hidden="true"><use href="#i-zoom-out"/></svg></button>' : "";
+    const screen = zoom && !card ? `<div class="zl">${inner}${zring}</div>` : inner + zring;
+    let out = `<div class="dev dev-${kind}"${zoom ? "" : hidden}>${chrome}<div class="scr-box"${zoom ? hidden : ""}>${scr}${screen}</div></div>`
+      + `${zoom && !card ? zbtn : ""}</div>`;
+    if (card) out = `<div class="zw"><div class="zl">${out}</div>${zbtn}</div>`;
+    el.innerHTML = out;
+    if (!s) return;
+    const img = el.querySelector("img"), box = img.closest(".scr");
+    const shown = () => box.classList.add("loaded");
+    if (img.complete && img.naturalWidth) shown(); else img.addEventListener("load", shown, { once: true });
+  }
+  $$(".cf[data-screen]").forEach(renderFrame);
+
+  /* ---------- Zoom on the detail: a cursor (a tap on touch screens) clicks the detail and the screen zooms in on it,
+     ringed; the button over the screen zooms out and in again. Tier C and frames with "start" begin zoomed in ---------- */
+  const zoomFrames = $$(".cf[data-screen]").filter((f) => f.querySelector(".zl"));
+  const zoomScope = (f) => f.closest("[data-zoom-scope]") || f;
+  const zoomed = (f) => zoomScope(f).classList.contains("zoomed");
+  function zoomFit(f) {
+    const win = $(".zw", f) || $(".scr", f), zl = $(".zl", f), scr = $(".scr", f), ring = $(".zring", f);
+    if (!win || !zl || !ring) return false;
+    const card = win !== scr, { box, vw } = zoomParams(f), sc = zoomScope(f);
+    ring.style.cssText = `left:${box[0]}%;top:${box[1]}%;width:${box[2]}%;height:${box[3]}%;--fr:${box[4] || 0}cqw`;
+    zl.style.transition = "none";
+    zl.style.translate = zl.style.scale = "none";
+    const w = win.getBoundingClientRect(), s = scr.getBoundingClientRect(), r = ring.getBoundingClientRect();
+    zl.style.translate = zl.style.scale = "";
+    void zl.offsetWidth;
+    zl.style.transition = "";
+    const W = win.offsetWidth, H = win.offsetHeight;
+    if (!w.width || !s.width || !W) return false;
+    const k = w.width / W;
+    const rad = card ? parseFloat(getComputedStyle(scr.closest(".scr-box")).borderTopLeftRadius) || 0 : 0;
+    const sx = (s.left - w.left) / k, sy = (s.top - w.top) / k + rad, sw = s.width / k, sh = s.height / k - 2 * rad;
+    const rw = r.width / k, rh = r.height / k, cx = (r.left - w.left) / k + rw / 2, cy = (r.top - w.top) / k + rh / 2;
+    const z = Math.max(1, Math.min((W + 2) / ((sw * vw) / 100), (W * 0.97) / rw, (H * 0.85) / rh));
+    const fit = (t, lo, hi) => (lo > hi - 4 ? (lo + hi) / 2 : Math.min(hi, Math.max(lo, t)));
+    sc.style.setProperty("--z", z.toFixed(3));
+    sc.style.setProperty("--zx", fit(W / 2 - z * cx, W - z * (sx + sw), -z * sx).toFixed(1) + "px");
+    const ty = screenOf(f).align === "top" ? H * 0.08 - z * (cy - rh / 2) : H / 2 - z * cy;
+    sc.style.setProperty("--zy", fit(ty, H - z * (sy + sh), -z * sy).toFixed(1) + "px");
+    sc.style.setProperty("--cx", ((cx / W) * 100).toFixed(2) + "%");
+    sc.style.setProperty("--cy", ((cy / H) * 100).toFixed(2) + "%");
+    const dev = f.querySelector(".dev").offsetWidth;
+    f.style.setProperty("--zb", Math.round(Math.min(36, Math.max(26, dev * 0.13))) + "px");
+    f.style.setProperty("--zt", Math.round(Math.min(30, Math.max(16, W * 0.18))) + "px");
+    const zb = $(".zbtn", f);
+    if (zb) zb.classList.toggle("mini", dev < 140);
+    f.classList.toggle("z1", z < 1.02);
+    return true;
+  }
+  function zoomSet(f, on) {
+    zoomScope(f).classList.toggle("zoomed", on);
+    const b = $(".zbtn", f);
+    if (b) b.setAttribute("aria-pressed", String(on));
+  }
+  function zoomPlay(f) {
+    if (f._played) return;
+    f._played = true;
+    zoomFit(f);
+    const hostEl = $(".zw", f) || $(".scr", f);
+    const tap = !matchMedia("(hover: hover) and (pointer: fine)").matches;
+    hostEl.insertAdjacentHTML("beforeend", (tap ? '<span class="zc-touch"></span>'
+      : '<span class="zc-cursor"><svg viewBox="0 0 14 20"><path d="M1 1v15.6l4.1-3.9 2.7 6.2 2.7-1.2-2.6-6.1h5.7z"/></svg></span>') + '<span class="zc-ripple"></span>');
+    $(".zc-ripple", hostEl).addEventListener("animationstart", () => { if (!f._user) zoomSet(f, true); }, { once: true });
+    hostEl.addEventListener("animationend", (e) => { if (e.target.matches(".zc-cursor, .zc-touch, .zc-ripple")) e.target.remove(); });
+  }
+  let zoomNext = 0;
+  function zoomQueue(f, delay = 250) {
+    const now = performance.now(), at = Math.max(now + delay, zoomNext);
+    zoomNext = at + 800;
+    setTimeout(() => zoomPlay(f), at - now);
+  }
+  const startZoomed = (f) => { zoomFit(f); f._played = true; zoomSet(f, true); };
+  const ro = new ResizeObserver((entries) => entries.forEach((e) => zoomFit(e.target)));
+  zoomFrames.forEach((f) => ro.observe(f));
+  mqNarrow.addEventListener("change", () => zoomFrames.forEach(zoomFit));
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest(".zbtn"), f = b && b.closest(".cf[data-screen]");
+    if (!f) return;
+    f._played = f._user = true;
+    zoomFit(f);
+    zoomSet(f, !zoomed(f));
+  });
+  const zio = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    zio.unobserve(e.target);
+    zoomQueue(e.target);
+  }), { threshold: 0.6 });
+  zoomFrames.forEach((f) => { if (tierC || screenOf(f).start) startZoomed(f); else zio.observe(f); });
 
   /* ---------- Play on enter (the ledger's RoomIQ column) ---------- */
   if ("IntersectionObserver" in window && !tierC) {
