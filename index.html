@@ -12,7 +12,7 @@
 <title>Free room-by-room forecast for any US address | RoomIQ</title>
 <meta name="description" content="What will this house earn by the room? Room rents, fill speed and nearby supply for one address, each with its evidence. Free plan, no card.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="page-version" content="2">
+<meta name="page-version" content="3">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="RoomIQ">
 <meta property="og:title" content="What will this house earn by the room? | RoomIQ">
@@ -394,37 +394,6 @@ html.dlg-open .sticky-bar{transform:translateY(110%)}
 @keyframes check{from{stroke-dashoffset:1}}
 .sent .label{margin-top:8px;color:var(--c-text-2)}
 @media (min-width:600px){.form .row{grid-template-columns:1fr 1fr}}
-/* The scorecard */
-.sc-prog{height:6px;border-radius:3px;background:var(--c-surface-2);overflow:hidden;margin-top:4px}
-.sc-prog i{display:block;height:100%;width:var(--p,0%);border-radius:3px;background:var(--c-grad-forward);transition:width var(--t-reveal) var(--ease-out)}
-.sc-q{margin:6px 0 0;padding:0;border:0;min-width:0}
-.sc-q legend{display:grid;gap:6px;padding:0;margin-bottom:14px}
-.sc-q legend .label{color:var(--c-text-2)}
-.sc-q legend b{font:750 clamp(21px,2.4vw,26px)/1.2 var(--f-display);letter-spacing:-.015em;color:var(--c-heading)}
-.sc-opts{display:grid;gap:8px}
-.sc-opt{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:center;min-height:52px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--c-line-strong);cursor:pointer;font-size:16px;color:var(--c-heading);transition:border-color var(--t-ui) ease,background-color var(--t-ui) ease}
-.sc-opt input{width:20px;height:20px;margin:0;accent-color:var(--c-primary-600)}
-.sc-opt:has(input:checked){border-color:var(--c-accent);background:color-mix(in srgb,var(--c-accent) 9%,var(--c-bg))}
-.sc-opt:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:2px}
-.sc-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
-.sc-nav .btn{min-height:48px}
-.sc-result{display:grid;gap:14px}
-.sc-result:focus{outline:none}
-.sc-result[hidden],.sc-quiz[hidden]{display:none}
-.sc-score{display:flex;align-items:baseline;gap:10px}
-.sc-score b{font:800 72px/1 var(--f-display);letter-spacing:-.03em;color:var(--c-heading);font-variant-numeric:tabular-nums}
-.sc-score span{color:var(--c-text-2);font-weight:600}
-.sc-tier{display:inline-block;justify-self:start;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c-accent) 14%,var(--c-bg));border:1px solid color-mix(in srgb,var(--c-accent) 50%,transparent);color:var(--c-accent-text);font:700 14px/1.3 var(--f-text)}
-.sc-msg{color:var(--c-text-2);font-size:16.5px}
-.sc-gh{margin-top:6px;font:700 19px/1.2 var(--f-display);letter-spacing:-.01em}
-.sc-gaps{display:grid;gap:10px;counter-reset:g}
-.sc-gaps li{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:12px 14px;border-radius:12px;background:var(--c-surface-2);font-size:15px;color:var(--c-text)}
-.sc-gaps li::before{counter-increment:g;content:counter(g);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--c-heading);color:var(--c-bg);font:700 12px/1 var(--f-text)}
-.sc-gaps li b{display:block;margin-bottom:3px;color:var(--c-heading)}
-.sc-out{font-size:13.5px;color:var(--c-text-2)}
-.sc-ctas{margin-top:4px}
-.sc-email{margin-top:10px;padding:18px;border-radius:16px;border:1px solid var(--c-line)}
-.sc-again{justify-self:start;min-height:44px;padding:0 4px;border:0;background:none;color:var(--c-accent-text);font:650 15px/1 var(--f-text);cursor:pointer;text-decoration:underline;text-underline-offset:4px}
 
 /* Reduced transparency: solid header and bar */
 @media (prefers-reduced-transparency:reduce){
@@ -457,8 +426,6 @@ html.dlg-open .sticky-bar{transform:translateY(110%)}
 .icon-btn:active{transform:scale(.95)}
 .cta-btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .ff.is-done > :not(.ff-h):not(.ff-done){display:none}
-.sc-gate{margin-top:6px}
-.sc-gate[hidden]{display:none}
 .sec-head{display:grid;gap:16px;max-width:820px;margin-bottom:clamp(28px,4vw,48px)}
 .band{background:var(--band);color:var(--c-neutral-300)}
 .band h2,.band h3{color:#fff}
@@ -541,8 +508,8 @@ html:not(.has-vsl):not(.is-preview) .vsl{display:none}
 .ff{display:grid;gap:12px;padding:clamp(16px,2.4vw,28px);border-radius:var(--r-card);background:var(--c-bg);border:1px solid var(--c-line-strong);box-shadow:var(--shadow-card)}
 .ff-h{font:750 clamp(20px,2vw,24px)/1.2 var(--f-display);letter-spacing:-.015em;color:var(--c-heading)}
 .ff .btn{width:100%}
-.ff .btn,.sc-card .btn{white-space:normal;text-align:center;line-height:1.2;padding-block:10px}
-.hero-act,.sc-card,.ff{min-width:0}
+.ff .btn,.score-card .btn{white-space:normal;text-align:center;line-height:1.2;padding-block:10px}
+.hero-act,.score-card,.ff{min-width:0}
 .ff .field{gap:5px}
 .ff-note{font:650 14.5px/1.4 var(--f-text);color:var(--c-heading)}
 .ff-small{font-size:13.5px;line-height:1.45;color:var(--c-text-2)}
@@ -552,10 +519,10 @@ html:not(.has-vsl):not(.is-preview) .vsl{display:none}
 .ff .sent .btn{width:auto;margin-top:12px}
 .ff-done[hidden]{display:none}
 .v-score .hero-act .ff{display:none}
-html:not(.v-score) .sc-card{display:none}
-.sc-card{display:grid;gap:14px;padding:clamp(18px,2.4vw,28px);border-radius:var(--r-card);background:var(--c-bg);border:1px solid var(--c-line-strong);box-shadow:var(--shadow-card)}
-.sc-topics{display:flex;flex-wrap:wrap;gap:8px}
-.sc-topics li{padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c-accent) 12%,var(--c-bg));border:1px solid color-mix(in srgb,var(--c-accent) 40%,transparent);font:600 13.5px/1.2 var(--f-text);color:var(--c-heading)}
+html:not(.v-score) .score-card{display:none}
+.score-card{display:grid;gap:14px;padding:clamp(18px,2.4vw,28px);border-radius:var(--r-card);background:var(--c-bg);border:1px solid var(--c-line-strong);box-shadow:var(--shadow-card)}
+.score-topics{display:flex;flex-wrap:wrap;gap:8px}
+.score-topics li{padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c-accent) 12%,var(--c-bg));border:1px solid color-mix(in srgb,var(--c-accent) 40%,transparent);font:600 13.5px/1.2 var(--f-text);color:var(--c-heading)}
 
 /* The street: three made-up houses, asking rent against what each collects */
 .street{display:grid;gap:14px}
@@ -871,13 +838,13 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
           <p class="ff-note">Free plan. No card needed. Three forecasts a month.</p>
           <p class="ff-small">We check coverage first. If your market isn't covered yet, we'll say so and save your spot.</p>
           <p class="ff-small">We use your email for your forecast and your account. <a href="https://roomiq.io/privacy" data-site="privacyUrl">Privacy policy</a></p>
-          <button class="ff-alt" type="button" data-cta="score" data-placement="hero">Not ready? Score your deal<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <a class="ff-alt" href="#" data-cta="score" data-placement="hero">Not ready? Score your deal<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </form>
-        <div class="sc-card">
+        <div class="score-card">
           <h2 class="ff-h">The Co-Living Deal Readiness Scorecard</h2>
           <p class="ff-small">Seven questions, one per screen. About two minutes.</p>
-          <ul class="sc-topics" aria-label="What it asks about"><li>Rent source</li><li>Fill and supply</li><li>Bath mix</li><li>Zoning, financing, reserves</li></ul>
-          <button class="btn btn-primary" type="button" data-cta="score" data-placement="hero">Get my Deal Readiness Score<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <ul class="score-topics" aria-label="What it asks about"><li>Rent source</li><li>Fill and supply</li><li>Bath mix</li><li>Zoning, financing, reserves</li></ul>
+          <a class="btn btn-primary" href="#" data-cta="score" data-placement="hero">Get my Deal Readiness Score<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <p class="ff-note">No card. No sales call.</p>
           <a class="ff-alt" href="#final">Or run a free forecast<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
@@ -1257,7 +1224,7 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
       </div>
       <p class="ff-note">Free plan. No card needed. Three forecasts a month.</p>
       <p class="ff-small">We check coverage first. If your market isn't covered yet, we'll say so and save your spot.</p>
-      <button class="ff-alt" type="button" data-cta="score" data-placement="final">Not ready? Take the scorecard<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <a class="ff-alt" href="#" data-cta="score" data-placement="final">Not ready? Take the scorecard<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </form>
   </div>
 </section>
@@ -1315,45 +1282,6 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
   </div>
 </dialog>
 
-<dialog class="dlg dlg-score" id="score-dlg" aria-labelledby="score-h">
-  <div class="dlg-in">
-    <div class="dlg-head"><h2 class="h3" id="score-h">Co-Living Deal Readiness Scorecard</h2><button class="icon-btn dlg-x" type="button" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-    <div class="sc-quiz" id="sc-quiz">
-      <p class="dlg-lead">Seven questions about your next deal. One per screen.</p>
-      <div class="sc-prog" aria-hidden="true"><i id="sc-bar"></i></div>
-      <form id="sc-form">
-        <fieldset class="sc-q">
-          <legend><span class="label" id="sc-n"></span><b id="sc-text"></b></legend>
-          <div class="sc-opts" id="sc-opts"></div>
-        </fieldset>
-        <div class="sc-nav"><button type="button" class="btn btn-line" id="sc-back">Back</button><button type="submit" class="btn btn-primary" id="sc-next" disabled>Next</button></div>
-      </form>
-    </div>
-    <form class="form sc-email sc-gate" id="sc-gate" novalidate hidden tabindex="-1" aria-labelledby="sc-gate-h">
-      <p id="sc-gate-h"><b>Your score is ready. Where should we send it?</b></p>
-      <p class="sc-msg">We'll show it here too, with your three biggest gaps and the underwriting checklist.</p>
-      <div class="field"><label for="sc-mail">Email</label><input id="sc-mail" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" aria-describedby="e-sc-mail"><p class="err" id="e-sc-mail"></p></div>
-      <label class="consent"><input type="checkbox" id="sc-consent" aria-describedby="e-sc-consent"><span>You may email me my results and RoomIQ's underwriting checklist.</span></label>
-      <p class="err" id="e-sc-consent"></p>
-      <button class="btn btn-primary" type="submit">See my score</button>
-      <p class="err" id="e-sc-send" role="alert"></p>
-    </form>
-    <div class="sc-result" id="sc-result" hidden tabindex="-1">
-      <div class="sc-score"><b id="sc-num">0</b><span>out of 100</span></div>
-      <p class="sc-tier" id="sc-tier"></p>
-      <p class="sc-msg" id="sc-msg"></p>
-      <h3 class="sc-gh">Your three biggest gaps</h3>
-      <ol class="sc-gaps" id="sc-gaps"></ol>
-      <p class="sc-out">Zoning and financing sit outside RoomIQ. This is not legal or financial advice.</p>
-      <div class="cta-btns sc-ctas">
-        <a class="btn btn-primary" id="sc-forecast" href="#ff-top" data-to-form="addr" data-placement="scorecard">Run a free forecast</a>
-        <a class="btn btn-line" id="sc-walk" href="mailto:marcel@roomiq.io?subject=20-minute%20walkthrough" data-site="walkthroughHref" hidden>Book a 20-minute walkthrough</a>
-      </div>
-      <p class="label" id="sc-sent-note" data-internal>Preview: no form endpoint is set, so nothing was sent.</p>
-      <button type="button" class="sc-again" id="sc-again">Start again</button>
-    </div>
-  </div>
-</dialog>
 
 <script>
 (() => {
@@ -1383,6 +1311,7 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
     seatsLeft: null,                       // a number, with seatsUpdated as a date such as "Dec 1"
     seatsUpdated: null,
     vsl: { provider: null, id: null, src: null, captions: null },   // provider: "youtube", "vimeo", "wistia" or "mp4" (src, captions as .vtt)
+    scorecardUrl: null,                    // the Deal Readiness Scorecard, a separate tool: every "score" button links to it, campaign parameters carried. Until set they do nothing
     designVersion: "meta_v1"
   };
 
@@ -1398,20 +1327,15 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
     seats: "{n} of 12 seats left · updated {d}",
     scoreCta: "Get my Deal Readiness Score"
   };
-  // Scorecard questions, answers, points and tiers: the same as the main landing page (GTM repo, deliverables/lead_magnet_spec.xlsx)
-  const SCORE = {"title": "Co-Living Deal Readiness Scorecard", "lead": "Seven questions about your next deal. One per screen.", "progress": "Question {n} of {total}", "back": "Back", "next": "Next", "see": "See my score", "restart": "Start again", "of": "out of 100", "gapsH": "Your three biggest gaps", "outside": "Zoning and financing sit outside RoomIQ. This is not legal or financial advice.", "questions": [{"q": "Where does your per-room rent number come from?", "a": [{"t": "I don't have one yet", "p": 0}, {"t": "A platform's earnings calculator", "p": 1}, {"t": "Whole-home rent divided by bedrooms", "p": 1}, {"t": "Asking rents I found on room listings", "p": 2}, {"t": "Comps of nearby rooms, with how fast they filled", "p": 4}], "gap": "Your rent number is an assumption. Check what rooms near the address list for, by bath type, and how much evidence stands behind it."}, {"q": "How do you know how fast rooms fill near the property?", "a": [{"t": "I haven't looked", "p": 0}, {"t": "I assume a vacancy percentage", "p": 1}, {"t": "Host stories and forum posts", "p": 2}, {"t": "A platform's market reports", "p": 2}, {"t": "Observed fill times of comparable rooms nearby", "p": 4}], "gap": "You don't know how fast rooms fill nearby, and your first months of cash flow depend on it."}, {"q": "How many co-living homes compete within about 3 miles?", "a": [{"t": "No idea", "p": 0}, {"t": "Some, I think", "p": 1}, {"t": "I counted listings", "p": 2}, {"t": "I know the count and roughly how full they are", "p": 4}], "gap": "Supply nearby decides how hard your rooms will be to fill. Count it before you buy."}, {"q": "Have you decided the bath mix?", "a": [{"t": "Not yet", "p": 0}, {"t": "Keeping the current bathrooms", "p": 1}, {"t": "Adding a bathroom because it seems worth it", "p": 2}, {"t": "Modeled private against shared-bath rents nearby", "p": 4}], "gap": "Bath mix is a structural revenue driver. Compare private and shared-bath rents nearby before you build."}, {"q": "Have you checked local rules on unrelated adults sharing a home?", "a": [{"t": "Not yet", "p": 0}, {"t": "I asked around", "p": 1}, {"t": "Read a summary online", "p": 2}, {"t": "Checked the municipal code", "p": 3}, {"t": "Confirmed with the city or an attorney", "p": 4}], "gap": "Zoning decides whether the plan is allowed at all, and it differs by city. Dallas counts four unrelated to the head of household, Phoenix five, Atlanta six. RoomIQ does not check zoning: ask the city or an attorney."}, {"q": "How will you finance the house?", "a": [{"t": "Not sure yet", "p": 0}, {"t": "A loan sized on whole-home rent", "p": 2}, {"t": "Cash", "p": 3}, {"t": "A lender experienced with room rentals, briefed on per-room income", "p": 4}], "gap": "Many loans are sized on whole-home rent, not room rents, and insurance is not a given. Talk to a lender and an insurer early."}, {"q": "What happens if lease-up takes longer than planned?", "a": [{"t": "I haven't planned for it", "p": 0}, {"t": "I'd lower rents", "p": 1}, {"t": "A few weeks of reserves", "p": 2}, {"t": "Reserves sized from how comparable launches nearby filled", "p": 4}], "gap": "Lease-up can stall. Size reserves from how comparable launches nearby actually filled."}], "tiers": [{"min": 0, "name": "Beginner: underwriting on assumptions", "msg": "Your numbers lean on estimates more than evidence. Start with the three gaps below. Each one can be checked before you make an offer.", "cta": "email"}, {"min": 40, "name": "Intermediate: partial evidence", "msg": "You have part of the picture. The gaps left are the ones that decide whether rooms fill.", "cta": "forecast"}, {"min": 70, "name": "Advanced: evidence-ready", "msg": "You underwrite like an operator. The open question is whether your evidence holds for this specific address.", "cta": "walkthrough"}], "forecastCta": "Run a free forecast on your address", "walkthroughCta": "Book a 20-minute walkthrough", "emailH": "Want your results and the underwriting checklist by email?", "emailLabel": "Email", "emailConsent": "You may email me my results and RoomIQ's underwriting checklist.", "emailSubmit": "Email me my results", "emailThanks": "Sent. Check your inbox shortly.", "emailNotSent": "Preview: no form endpoint is set, so nothing was sent."};
 
   /* ---------- RoomIQ's arithmetic, as on the main landing page: 4.35 weeks a month, as the product prints ---------- */
   const M = (() => {
-    const WEEKS = 4.35, OCCUPANCY = 90, SCORE_MAX = 28;
+    const WEEKS = 4.35, OCCUPANCY = 90;
     const estimate = (rooms, weeklyRent, occupancyPct = OCCUPANCY) => rooms * weeklyRent * WEEKS * (occupancyPct / 100);
     const occupancyGap = (rooms, weeklyRent, assumed = OCCUPANCY, observed = 75) => estimate(rooms, weeklyRent, assumed) - estimate(rooms, weeklyRent, observed);
     const rentGap = (rooms, overBy = 20, occupancyPct = OCCUPANCY) => estimate(rooms, overBy, occupancyPct);
-    const score = (points) => Math.round((points.reduce((a, b) => a + b, 0) / SCORE_MAX) * 100);
-    const tier = (s, tiers) => tiers.reduce((at, t, i) => (s >= t.min ? i : at), 0);
-    const gaps = (points, n = 3) => points.map((p, i) => [p, i]).sort((a, b) => a[0] - b[0] || a[1] - b[1]).slice(0, n).map((x) => x[1]);
     const money = (v) => { const r = Math.round(v); return (r < 0 ? "−" : "") + "$" + Math.abs(r).toLocaleString("en-US"); };
-    return { estimate, occupancyGap, rentGap, score, tier, gaps, money };
+    return { estimate, occupancyGap, rentGap, money };
   })();
 
   /* ---------- View flags: ?view=preview shows the open facts; tier C is reduced motion, Save-Data or ?tier=c ---------- */
@@ -1588,7 +1512,7 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
     toForm(a.dataset.toForm);
   });
 
-  /* ---------- Dialogs: the scorecard and the seat application ---------- */
+  /* ---------- Dialogs: the seat application ---------- */
   let opener = null;
   function openDlg(dlg, from) {
     if (!dlg.showModal) return false;
@@ -1646,93 +1570,14 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
     });
   }
 
-  // The Deal Readiness Scorecard: seven questions, then the email, then the score, the tier and the three gaps
-  {
-    const dlg = $("#score-dlg"), Q = SCORE.questions, quiz = $("#sc-quiz"), gate = $("#sc-gate"), result = $("#sc-result");
-    const scForm = $("#sc-form"), opts = $("#sc-opts"), back = $("#sc-back"), next = $("#sc-next");
-    let at = 0, started = false, last = null;
-    const answers = Q.map(() => null);
-    function show() {
-      const q = Q[at];
-      $("#sc-n").textContent = fill(SCORE.progress, { n: at + 1, total: Q.length });
-      $("#sc-text").textContent = q.q;
-      $("#sc-bar").style.width = `${(at / Q.length) * 100}%`;
-      opts.innerHTML = q.a.map((a, i) => `<label class="sc-opt"><input type="radio" name="sc-a" value="${i}"${answers[at] === i ? " checked" : ""}><span>${xmlEsc(a.t)}</span></label>`).join("");
-      back.hidden = at === 0;
-      next.disabled = answers[at] === null;
-      next.textContent = at === Q.length - 1 ? SCORE.see : SCORE.next;
-    }
-    opts.addEventListener("change", (e) => { if (e.target.name === "sc-a") { answers[at] = +e.target.value; next.disabled = false; } });
-    back.addEventListener("click", () => { if (at > 0) { at--; show(); const c = $("input:checked", opts) || $("input", opts); if (c) c.focus(); } });
-    scForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (answers[at] === null) return;
-      if (at < Q.length - 1) { at++; show(); const first = $("input", opts); if (first) first.focus(); return; }
-      const pts = answers.map((a, i) => Q[i].a[a].p);
-      const s = M.score(pts), tier = SCORE.tiers[M.tier(s, SCORE.tiers)], gaps = M.gaps(pts);
-      last = { score: s, tier: tier.name, cta: tier.cta, answers: answers.map((a, i) => Q[i].a[a].t), gaps };
-      quiz.hidden = true;
-      gate.hidden = false;
-      $("#sc-mail").focus();
-    });
-    gate.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const mail = $("#sc-mail"), consent = $("#sc-consent");
-      const ok = [setErr(mail, okEmail(mail.value.trim()) ? "" : T.email), setErr(consent, consent.checked ? "" : T.consent)];
-      if (ok.includes(false)) { $$("[aria-invalid=true]", gate)[0].focus(); return; }
-      const btn = $('button[type="submit"]', gate);
-      btn.disabled = true;
-      $("#e-sc-send").textContent = "";
-      const eventId = TRACK.newId();
-      let res;
-      try {
-        res = await post({ type: "scorecard", email: mail.value.trim(), consentEmail: true, score: last.score, tier: last.tier, answers: last.answers, gaps: last.gaps.map((i) => Q[i].q), event_id: eventId, event_name: "ScorecardComplete" });
-      } catch (err) {
-        btn.disabled = false;
-        $("#e-sc-send").textContent = fill(T.failed, { email: SITE.contactEmail });
-        return;
-      }
-      lastEmail = mail.value.trim();
-      TRACK.event("ScorecardComplete", { content_name: "scorecard" }, eventId);
-      if (res.sent) { const n = $("#sc-sent-note"); if (n) n.remove(); }
-      btn.disabled = false;
-      finish();
-    });
-    function finish() {
-      $("#sc-num").textContent = last.score;
-      $("#sc-tier").textContent = last.tier;
-      $("#sc-msg").textContent = SCORE.tiers.find((t) => t.name === last.tier).msg;
-      $("#sc-gaps").innerHTML = last.gaps.map((i) => `<li><span><b>${xmlEsc(Q[i].q)}</b>${xmlEsc(Q[i].gap)}</span></li>`).join("");
-      const walk = $("#sc-walk"), fc = $("#sc-forecast");
-      walk.hidden = last.cta !== "walkthrough";
-      walk.classList.toggle("btn-primary", last.cta === "walkthrough");
-      walk.classList.toggle("btn-line", last.cta !== "walkthrough");
-      fc.classList.toggle("btn-primary", last.cta !== "walkthrough");
-      fc.classList.toggle("btn-line", last.cta === "walkthrough");
-      gate.hidden = true;
-      result.hidden = false;
-      result.focus();
-    }
-    $("#sc-again").addEventListener("click", () => {
-      answers.fill(null); at = 0;
-      result.hidden = true; gate.hidden = true; quiz.hidden = false;
-      show();
-      const first = $("input", opts); if (first) first.focus();
-    });
-    document.addEventListener("click", (e) => {
-      const a = e.target.closest('[data-cta="score"]');
-      if (!a || e.defaultPrevented) return;
-      if (!openDlg(dlg, a)) return;
-      e.preventDefault();
-      if (!started) { started = true; TRACK.event("ScorecardStart", { content_name: "scorecard" }); }
-      if (!result.hidden) { result.focus(); return; }
-      if (!gate.hidden) { $("#sc-mail").focus({ preventScroll: true }); return; }
-      show();
-      const first = $("input:checked", opts) || $("input", opts);
-      if (first) first.focus({ preventScroll: true });
-    });
-    show();
-  }
+  // The Deal Readiness Scorecard is its own tool, built separately. Every "score" button links to it once
+  // SITE.scorecardUrl is set (campaign parameters carried), or once its href is replaced. While a button's href is
+  // still the placeholder "#", a click does nothing.
+  if (SITE.scorecardUrl) $$('[data-cta="score"]').forEach((a) => { a.href = withParams(SITE.scorecardUrl); });
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest('[data-cta="score"]');
+    if (a && a.getAttribute("href") === "#") e.preventDefault();
+  });
 
   /* ---------- The VSL: a click loads the player (nothing third-party before it), chapters jump ---------- */
   {
@@ -1834,8 +1679,8 @@ html.dlg-open .sticky-m,html.consent-open .sticky-m{transform:translateY(110%)}
   /* ---------- Phone sticky action: shown once the hero action is off screen, hidden while the end form is in view ---------- */
   {
     const sticky = $("#sticky"), btn = $("#sticky-btn");
-    if (scoreFirst) { btn.textContent = T.scoreCta; btn.removeAttribute("data-to-form"); btn.dataset.cta = "score"; btn.href = "#"; }
-    const heroAct = scoreFirst ? $(".sc-card") : $("#ff-top"), end = $("#ff-end");
+    if (scoreFirst) { btn.textContent = T.scoreCta; btn.removeAttribute("data-to-form"); btn.dataset.cta = "score"; btn.href = SITE.scorecardUrl ? withParams(SITE.scorecardUrl) : "#"; }
+    const heroAct = scoreFirst ? $(".score-card") : $("#ff-top"), end = $("#ff-end");
     let heroVis = true, endVis = false;
     const upd = () => {
       const show = !heroVis && !endVis;
